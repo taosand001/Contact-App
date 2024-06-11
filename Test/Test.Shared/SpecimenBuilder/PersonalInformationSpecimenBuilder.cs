@@ -37,8 +37,8 @@ namespace Test.Shared.SpecimenBuilder
                 {
                     Directory.CreateDirectory(folderPath);
                 }
-
-                string filePath = @"C:\Users\TAOSAND\Pictures\Annotation LT.png";
+                var currentDirectory = Directory.GetCurrentDirectory();
+                var filePath = Path.Combine(currentDirectory, "..", "..", "..", "..", "Test.Shared/Pictures/Annotation LT.png");
                 var contentBytes = File.ReadAllBytes(filePath);
                 var fileStream = new MemoryStream(contentBytes);
                 var formFile = new FormFile(fileStream, 0, contentBytes.Length, "Data", "example.png")
