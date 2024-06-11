@@ -14,6 +14,7 @@ namespace Contact.Shared.Model
         public string? ApartmentNumber { get; set; }
         public string? PostalCode { get; set; }
         public string? HouseNumber { get; set; }
+        [JsonIgnore]
         public int PersonalInformationId { get; set; }
         [JsonIgnore]
         public PersonalInformation? PersonalInformation { get; set; }

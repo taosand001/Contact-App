@@ -16,6 +16,7 @@ namespace Contact.Shared.Model
         public string Username { get; set; }
         public string Email { get; set; }
         [StringLength(15)]
+        [JsonIgnore]
         public string? Token { get; set; }
         [JsonIgnore]
         public byte[] PasswordHash { get; set; }
@@ -23,6 +24,7 @@ namespace Contact.Shared.Model
         public byte[] PasswordSalt { get; set; }
         [JsonIgnore]
         public RoleType Role { get; set; }
+        [JsonIgnore]
         public DateTime LastPasswordChange { get; set; }
         [JsonIgnore]
         public List<PersonalInformation> PersonalInformation { get; set; } = new List<PersonalInformation>();

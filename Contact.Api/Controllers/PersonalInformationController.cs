@@ -70,6 +70,10 @@ namespace Contact.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (UnauthorizedErrorException ex)
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -79,6 +83,7 @@ namespace Contact.Api.Controllers
         [HttpDelete("id")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(object))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> DeletePersonalInformation(int id)
         {
@@ -91,6 +96,10 @@ namespace Contact.Api.Controllers
             {
                 return BadRequest(ex.Message);
             }
+            catch (UnauthorizedErrorException ex)
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, ex.Message);
+            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
@@ -100,6 +109,7 @@ namespace Contact.Api.Controllers
         [HttpGet("id")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PersonalInformation))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> GetPersonalInformation(int id)
@@ -122,7 +132,7 @@ namespace Contact.Api.Controllers
             }
             catch (UnauthorizedErrorException ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(StatusCodes.Status401Unauthorized, ex.Message);
             }
             catch (Exception ex)
             {
@@ -133,6 +143,7 @@ namespace Contact.Api.Controllers
         [HttpGet("GetImage/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(FileStreamResult))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status500InternalServerError, Type = typeof(string))]
         public async Task<IActionResult> GetImage(int id)
         {
@@ -156,6 +167,10 @@ namespace Contact.Api.Controllers
             catch (NotFoundErrorException ex)
             {
                 return NotFound(ex.Message);
+            }
+            catch (UnauthorizedErrorException ex)
+            {
+                return StatusCode(StatusCodes.Status401Unauthorized, ex.Message);
             }
             catch (Exception ex)
             {
