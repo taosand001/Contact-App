@@ -17,10 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Contact.Api\Contact.Api.csproj" />
-    <ProjectReference Include="..\Contact.Domain\Contact.Domain.csproj" />
-    <ProjectReference Include="..\Contact.Infrastructure\Contact.Infrastructure.csproj" />
-    <ProjectReference Include="..\Test\Test.Shared\Test.Shared.csproj" />
+    <ProjectReference Include="..\..\Contact.Api\Contact.Api.csproj" />
+    <ProjectReference Include="..\Test.Shared\Test.Shared.csproj" />
   </ItemGroup>
 
   <ItemGroup>
