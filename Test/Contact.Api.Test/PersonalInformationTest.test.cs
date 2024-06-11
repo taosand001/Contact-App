@@ -248,8 +248,8 @@ namespace Contact.Api.Test
 
             var result = await _personalInformationController.GetPersonalInformation(It.IsAny<int>());
 
-            Assert.IsType<BadRequestObjectResult>(result);
-            Assert.Equal("User not authorized to delete this personal information", ((BadRequestObjectResult)result).Value);
+            Assert.IsType<ObjectResult>(result);
+            Assert.Equal("User not authorized to delete this personal information", ((ObjectResult)result).Value);
         }
 
         [Fact]
