@@ -35,12 +35,12 @@ namespace Contact.Shared.Attributes
                                 var numberType = phoneUtil.GetRegionCodeForNumber(parsedNumber);
                                 if (!isValid || numberType != "LT")
                                 {
-                                    return new ValidationResult(GetErrorMessage($"Invalid {_fieldName}"));
+                                    return new ValidationResult(GetErrorMessage($"Invalid {_fieldName}. {_fieldName} must be a valid Lithuanian number"));
                                 }
                             }
                             catch (NumberParseException)
                             {
-                                return new ValidationResult(GetErrorMessage($"Invalid {_fieldName}"));
+                                return new ValidationResult(GetErrorMessage($"Invalid {_fieldName}. {_fieldName} must be a valid Lithuanian number"));
                             }
                             break;
                         case "FirstName":

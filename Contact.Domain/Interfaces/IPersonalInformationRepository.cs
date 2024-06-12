@@ -9,5 +9,6 @@ namespace Contact.Domain.Interfaces
         Task<IEnumerable<PersonalInformation>> GetAllAsync();
         Task<PersonalInformation> GetAsync(int id);
         Task<PersonalInformation> UpdateAsync(PersonalInformation personalInformation);
+        Task<PersonalInformation> GetPersonalCode(string personalCode);
     }
 }

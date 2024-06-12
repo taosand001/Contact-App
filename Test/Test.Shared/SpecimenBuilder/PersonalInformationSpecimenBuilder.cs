@@ -20,9 +20,9 @@ namespace Test.Shared.SpecimenBuilder
                     Email = "test@gmail.com",
                     ImageContentType = "image/jpeg",
                     ImageUrl = "photos/test.jpg",
-                    DateOfBirth = DateOnly.FromDateTime(new DateTime(1996, 12, 12)),
-                    Gender = GenderType.Male,
-                    PersonalCode = "39105141646",
+                    DateOfBirth = DateOnly.FromDateTime(new DateTime(1972, 08, 01)),
+                    Gender = GenderType.Female,
+                    PersonalCode = "47208018929",
                     User = context.Create<User>(),
                     PhoneNumber = "62659246",
                     Address = context.Create<Address>()
@@ -55,9 +55,9 @@ namespace Test.Shared.SpecimenBuilder
                     LastName = "TestLastName",
                     Email = "test@gmail.com",
                     Image = formFile,
-                    DateOfBirth = new DateTime(1996, 12, 12),
-                    Gender = GenderType.Male,
-                    PersonalCode = "39105141646",
+                    DateOfBirth = new DateTime(1972, 08, 01),
+                    Gender = GenderType.Female,
+                    PersonalCode = "47208018929",
                     PhoneNumber = "62659246",
                     Address = context.Create<AddressDto>()
                 };

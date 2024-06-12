@@ -58,10 +58,11 @@ namespace Contact.Shared.Custom
                 checksum %= 11;
                 if (checksum == 10)
                 {
+                    checksum = 0;
                 }
             }
 
-            return personalCode[10] == '0';
+            return (personalCode[10] - '0') == checksum;
         }
 
         public static bool IsAllowedDomain(string email)
@@ -84,11 +85,11 @@ namespace Contact.Shared.Custom
             var nameRegex = new Regex(@"^[a-zA-Z]+$", RegexOptions.IgnoreCase);
             if (name.Length < 2 || name.Length > 50)
             {
-                return false;
+                throw new Exception("Must be between 2 and 50 characters");
             }
             else if (!nameRegex.IsMatch(name))
             {
-                return false;
+                throw new Exception("Must not contain numbers");
             }
             return true;
 

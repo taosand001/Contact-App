@@ -1,18 +1,23 @@
 ﻿using Contact.Shared.Attributes;
+using System.ComponentModel.DataAnnotations;
 
 namespace Contact.Shared.Dto
 {
     public class AddressDto
     {
         [FieldValidation("Street")]
+        [Required]
         public string? Street { get; set; }
         [FieldValidation("City")]
+        [Required]
         public string? City { get; set; }
         [FieldValidation("ApartmentNumber")]
         public string? ApartmentNumber { get; set; }
         [FieldValidation("PostalCode")]
+        [Required]
         public string? PostalCode { get; set; }
         [FieldValidation("HouseNumber")]
+        [Required]
         public string? HouseNumber { get; set; }
 
         public AddressDto() { }

@@ -45,14 +45,39 @@ namespace Contact.Infrastructure.Service
                     throw new NotFoundErrorException("User not found");
                 }
 
+                var (personalCodeBirthDate, gender) = PersonalCodeExtractor.ExtractBirthDateFromPersonalCode(personalInformationDto.PersonalCode);
+
+                if (gender != personalInformationDto.Gender)
+                {
+                    throw new ArgumentException("The gender in the personal code does not match the provided gender.");
+                }
+
+                if (personalCodeBirthDate.Year != personalInformationDto.DateOfBirth.Year ||
+                    personalCodeBirthDate.Month != personalInformationDto.DateOfBirth.Month)
+                {
+                    throw new ArgumentException("The birth date in the personal code does not match the provided birth date.");
+                }
+
+                var existingPersonalCode = await _personalInformationRepository.GetPersonalCode(personalInformationDto.PersonalCode);
+                if (existingPersonalCode != null)
+                {
+                    throw new ConflictErrorException("Personal Information could not be saved. Personal Code already exists");
+                }
+
                 var personalInformation = _mapper.Map<PersonalInformation>(personalInformationDto);
                 personalInformation.User = user;
+
                 await _personalInformationRepository.CreateAsync(personalInformation);
             }
             catch (DbUpdateException ex) when (IsUniqueConstraintViolation(ex))
             {
                 _logger.LogError(ex, "Personal Information could not be saved. Email already exists");
                 throw new ConflictErrorException("Personal Information could not be saved. Email already exists");
+            }
+            catch (ArgumentException ex)
+            {
+                _logger.LogError(ex, ex.Message);
+                throw new ArgumentException(ex.Message.ToString());
             }
             catch (Exception ex)
             {
@@ -133,8 +158,6 @@ namespace Contact.Infrastructure.Service
 
             return personalInformation;
         }
-
-
 
         public async Task UpdatePersonalInformationAsync(int id, PersonalInformationDto personalInformationDto)
         {

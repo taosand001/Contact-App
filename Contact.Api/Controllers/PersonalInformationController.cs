@@ -38,12 +38,14 @@ namespace Contact.Api.Controllers
             }
             catch (NotFoundErrorException ex)
             {
-
                 return BadRequest(ex.Message);
             }
             catch (ConflictErrorException ex)
             {
-
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentException ex)
+            {
                 return BadRequest(ex.Message);
             }
             catch (Exception ex)

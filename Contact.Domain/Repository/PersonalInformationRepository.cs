@@ -25,14 +25,13 @@ namespace Contact.Domain.Repository
             return result.Entity;
         }
 
+        public async Task<PersonalInformation> GetPersonalCode(string personalCode)
+        {
+            return await _context.PersonalInformations.Include(x => x.Address).Include(u => u.User).FirstOrDefaultAsync(x => x.PersonalCode == personalCode);
+        }
+
         public async Task<PersonalInformation> UpdateAsync(PersonalInformation personalInformation)
         {
-            //_context.Entry(personalInformation).State = EntityState.Modified;
-            //var isEmailInUse = await _context.PersonalInformations.AnyAsync(x => x.Email == personalInformation.Email && x.Id != personalInformation.Id);
-            //if (isEmailInUse)
-            //{
-            //    throw new Exception("Email is already in use");
-            //}
             var result = _context.PersonalInformations.Update(personalInformation);
             await _context.SaveChangesAsync();
             return result.Entity;
